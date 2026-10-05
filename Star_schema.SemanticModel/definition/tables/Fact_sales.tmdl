@@ -95,7 +95,26 @@ table Fact_sales
 				CurrentMonthSales - PreviousMonthSales,
 				PreviousMonthSales
 			)
-		formatString: 0.00%
+
+	measure 'Running Total Sales' =
+		VAR CurrentDate = MAX(Dim_date[date])
+		RETURN
+			CALCULATE(
+				[Total Sales],
+				FILTER(
+					ALL(Dim_date),
+					Dim_date[date] <= CurrentDate
+				)
+			)
+
+	measure 'City Sales Rank' =
+		RANKX(
+			ALL(Dim_city[city]),
+			[Total Sales],
+			,
+			DESC,
+			Dense
+		)
 
 	partition Fact_sales = m
 		mode: import
