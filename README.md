@@ -1,93 +1,73 @@
 # BrewMetrics BI
 
-A version-controlled Business Intelligence solution for BrewMetrics Coffee Co.
+A version-controlled Business Intelligence solution for BrewMetrics Coffee Co. developed using Power BI, Git, GitHub, and GitHub Copilot.
 
 ## 1. Project Overview
 
-This project develops a Business Intelligence solution for BrewMetrics Coffee Co. using Power BI.
+The BrewMetrics BI project analyses coffee sales data to understand sales performance across cities, store formats, product categories, individual items, and time.
 
-The project uses sales transaction data to analyse sales performance across cities, store formats, products and time periods.
+The original sales dataset was transformed into a structured star schema using Power Query. DAX measures were then created to support sales, quantity, growth, running-total, and ranking analysis.
 
-The project demonstrates:
+An interactive Power BI dashboard was developed to help analyse business performance and identify important sales trends.
 
-- Data cleaning and transformation using Power Query
-- Star schema data modelling
-- DAX measures
-- Interactive Power BI dashboard development
-- Git and GitHub version control
-- GitHub Copilot assistance for DAX development
+The project also uses Git and GitHub for version control and GitHub Copilot to assist with DAX development.
 
 ## 2. Dataset
 
-The dataset used for this project is:
+The project uses the `brewmetrics_sales.csv` dataset.
 
-`brewmetrics_sales.csv`
+The dataset contains 15,482 sales transactions with the following main fields:
 
-The dataset contains 15,482 sales transactions.
-
-The main columns are:
-
-- `sale_id`
-- `date`
-- `city`
-- `store_format`
-- `category`
-- `item`
-- `quantity`
-- `unit_price`
-- `sales_amount`
+- `sale_id` – unique identifier for each sale
+- `date` – date of the transaction
+- `city` – city where the sale occurred
+- `store_format` – format of the store
+- `category` – product category
+- `item` – individual product/item
+- `quantity` – quantity sold
+- `unit_price` – price per unit
+- `sales_amount` – total sales amount
 
 ## 3. Data Model
 
-The flat sales dataset was transformed into a **star schema** using Power Query.
+The Power BI model follows a star schema with `Fact_sales` as the central fact table connected to four dimension tables.
 
 ### Fact Table
 
 **Fact_sales**
 
-Contains the transaction-level sales data:
-
-- sale_id
-- date
-- city
-- store_format
-- category
-- item
-- quantity
-- unit_price
-- sales_amount
+The `Fact_sales` table contains transaction-level sales information, including sale ID, date, city, store format, product information, quantity, unit price, and sales amount.
 
 ### Dimension Tables
 
 **Dim_date**
-- date
-- Year
-- Month
+
+Contains date information used for time-based analysis:
+
+- `date`
+- `Year`
+- `Month`
 
 **Dim_city**
-- city
+
+Contains the unique cities and is used for city-level analysis and filtering.
 
 **Dim_store**
-- store_format
+
+Contains the different store formats and supports store-format analysis.
 
 **Dim_product**
-- category
-- item
 
-### Relationships
+Contains product information:
 
-The following relationships were created:
+- `category`
+- `item`
 
-- Dim_date → Fact_sales
-- Dim_city → Fact_sales
-- Dim_store → Fact_sales
-- Dim_product → Fact_sales
-
-The dimension tables have a one-to-many relationship with the Fact_sales table.
+The dimension tables are connected to the `Fact_sales` table using one-to-many relationships.
 
 ## 4. DAX Measures
 
-The following DAX measures were created for analysis.
+The following DAX measures were created.
 
 ### Total Sales
 
@@ -130,73 +110,96 @@ Total Quantity =
 SUM(Fact_sales[quantity])
 5. Power BI Dashboard
 
-The dashboard was created to provide an interactive view of BrewMetrics sales performance.
+The Power BI dashboard provides an interactive view of BrewMetrics sales performance.
 
-The dashboard includes:
+The dashboard contains:
 
 Total Sales KPI
 Total Quantity KPI
-Month-over-Month Sales Growth KPI
-Sales trend over time
-Sales by City
-Cold Brew seasonal analysis
-Sales by Category
-Top 10 Products
-Quantity by City
-Sales by Store Format
+MoM Sales Growth % KPI
+Sales by City column chart
+Sales Trend line chart
+Total Sales by Category donut chart
+City → Store Format drill-down chart
+Total Sales by Item bar chart
+Cold Brew Sales by Month line chart
 City slicer
-City → Store Format drill-down
+Cold Brew Seasonal Analysis
 
-The drill-down allows users to move from a city level to the store-format level for more detailed analysis.
+A separate monthly sales chart is used to analyse Cold Brew performance.
 
-6. Key Business Insights
-City Performance
+The item field is filtered to Cold Brew at the visual level, so the chart displays the monthly sales trend for Cold Brew only.
 
-Bengaluru has the highest total sales among the four cities, followed by Chennai, Hyderabad and Coimbatore.
+The rest of the dashboard continues to analyse the overall sales dataset.
 
-Cold Brew Seasonality
+6. Key Dashboard Insights
+1. Bengaluru has the highest city sales
 
-Cold Brew sales show a seasonal increase during the April–May period.
+The Sales by City chart shows that Bengaluru has the highest total sales among the four cities, followed by Chennai, Hyderabad, and Coimbatore.
 
-Sales Analysis
+The approximate sales values are:
 
-The dashboard combines overall sales, quantity, city, product and time-based analysis to help identify sales trends and performance differences.
+Bengaluru – ₹1.12M
+Chennai – ₹1.05M
+Hyderabad – ₹0.97M
+Coimbatore – ₹0.82M
+
+This indicates that Bengaluru is the strongest-performing city in the dataset.
+
+2. Coffee is the largest sales category
+
+The Total Sales by Category chart shows that Coffee contributes the largest share of total sales, at approximately 45.49%.
+
+Merchandise contributes approximately 38.81%, while Bakery contributes approximately 15.69%.
+
+This indicates that Coffee is the main contributor to overall sales.
+
+3. Cold Brew shows a seasonal sales pattern
+
+The Cold Brew Sales by Month chart uses a visual-level filter for the item field, selecting Cold Brew only.
+
+The monthly trend can therefore be used to observe changes in Cold Brew sales across the displayed months, particularly the increase during the April–May period.
 
 7. GitHub Copilot
 
-GitHub Copilot was used in Visual Studio Code to assist with creating DAX measures.
+GitHub Copilot was used through Visual Studio Code to assist with the development of DAX measures and project documentation.
 
-Copilot suggestions were reviewed against the Power BI semantic model before being added to the project.
+Copilot-generated suggestions were reviewed against the Power BI data model before being incorporated into the project.
 
-The Copilot-assisted work and observations are documented in:
-
-NOTES.md
+The Copilot-assisted development process and observations are documented in NOTES.md.
 
 8. Version Control
 
-Git and GitHub were used to maintain the project history.
+Git and GitHub were used to maintain a version-controlled history of the project.
 
-The project was developed through separate commits for different stages, including:
+Different development stages were committed separately, including:
 
 Initial project setup
 Star schema creation
 Total Sales measure
-Month-over-Month Growth measure
+Month-over-Month Sales Growth measure
 Running Total Sales measure
 City Sales Ranking measure
 Total Quantity measure
 Dashboard development
-Documentation
+Project documentation
 
-This provides a clear version history of the development process.
+This provides a clear history of the project development process.
 
 9. Project Files
 
 The repository contains:
 
-README.md – Project documentation
-NOTES.md – GitHub Copilot and DAX documentation
-REFLECTION.md – Project reflection
+README.md – project documentation
+NOTES.md – GitHub Copilot and DAX development notes
+REFLECTION.md – project reflection
 Power BI .pbip project files
 Semantic model files
 Source dataset
+10. Conclusion
+
+The BrewMetrics BI solution provides an interactive way to analyse sales performance across cities, categories, products, store formats, and time.
+
+The Cold Brew monthly analysis provides an additional view of product seasonality, while the city slicer and drill-down functionality allow users to explore the data at different levels.
+
+The project demonstrates the use of Power BI, DAX, Git, GitHub, and GitHub Copilot together to develop a structured and version-controlled Business Intelligence solution.
