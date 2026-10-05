@@ -83,6 +83,20 @@ table Fact_sales
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'MoM Sales Growth %' =
+		VAR CurrentMonthSales = [Total Sales]
+		VAR PreviousMonthSales =
+			CALCULATE(
+				[Total Sales],
+				DATEADD(Dim_date[date], -1, MONTH)
+			)
+		RETURN
+			DIVIDE(
+				CurrentMonthSales - PreviousMonthSales,
+				PreviousMonthSales
+			)
+		formatString: 0.00%
+
 	partition Fact_sales = m
 		mode: import
 		source =
@@ -96,4 +110,3 @@ table Fact_sales
 	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Table
-
