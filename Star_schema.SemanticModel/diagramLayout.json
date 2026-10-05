@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 567,
+            "y": 1
+          },
+          "nodeIndex": "Dim_city",
+          "nodeLineageTag": "18f04f26-9389-41de-a953-7e11c25a8b0d",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 9,
+            "y": 271
+          },
+          "nodeIndex": "Dim_date",
+          "nodeLineageTag": "78ffc907-a7ff-40b8-a935-edadfce50c41",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 202,
+            "y": 0
+          },
+          "nodeIndex": "Dim_product",
+          "nodeLineageTag": "ab2ed5c5-2d0c-48c6-91b2-ff8286ffd8d9",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 349,
+            "y": 210
+          },
+          "nodeIndex": "Fact_sales",
+          "nodeLineageTag": "1cab0d94-536a-4ac4-942b-d98753147cc9",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 802,
+            "y": 241.5
+          },
+          "nodeIndex": "Dim_store",
+          "nodeLineageTag": "fadf97f8-5b49-46e5-8f92-eee27ca5f3bc",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
